@@ -14,12 +14,14 @@ class ModelServer():
         self.nets = {}
         self.class_map = {}
         self.color_map = {}
+        self.cfg = {}
+        self.data = {}
 
         for model_id in models:
             try:
                 print(model_id)
-                cfg = models[model_id]['cfg']
-                data = models[model_id]['data']
+                self.cfg[model_id] = cfg = models[model_id]['cfg']
+                self.data[model_id] = data = models[model_id]['data']
                 weights = models[model_id]['weights']
 
 
@@ -92,6 +94,12 @@ def is_live():
     return {"msg": "Model server is live."}
 
 
+@app.get("/models/{model_id}")
+def get_model_summary(model_id: int):
+    try:
+        return open(app.modelserver.cfg[model_id]).readlines()
+    except:
+        return "model not found!"
 
 
 @app.post("/predict/")

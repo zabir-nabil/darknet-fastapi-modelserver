@@ -47,7 +47,7 @@ export PATH=/usr/local/cuda-11.0/bin:$PATH
 
 #### Run
 
-* `uvicorn serve:app --reload --port 8000`
+* `uvicorn serve:app --reload --host '0.0.0.0' --port 8000`
 
 * docs at  http://127.0.0.1:8000/docs
 
@@ -55,4 +55,7 @@ export PATH=/usr/local/cuda-11.0/bin:$PATH
 
 * Run `python requests_client.py`
 
+#### API
+
+![api list](./docs/apis.png)
 

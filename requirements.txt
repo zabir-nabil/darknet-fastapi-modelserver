@@ -1,0 +1,8 @@
+opencv-python
+grpcio
+grpcio-tools
+numpy
+fastapi
+uvicorn[standard]
+requests
+faster_than_requests

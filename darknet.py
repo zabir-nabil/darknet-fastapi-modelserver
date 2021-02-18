@@ -25,7 +25,7 @@ from ctypes import *
 import math
 import random
 import os
-
+from model_config import darknet_path
 
 class BOX(Structure):
     _fields_ = [("x", c_float),
@@ -225,7 +225,7 @@ if os.name == "nt":
             lib = CDLL(winGPUdll, RTLD_GLOBAL)
             print("Environment variables indicated a CPU run, but we didn't find {}. Trying a GPU run anyway.".format(winNoGPUdll))
 else:
-    lib = CDLL("/usr/local/libdarknet.so", RTLD_GLOBAL) 
+    lib = CDLL(darknet_path, RTLD_GLOBAL) 
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
 lib.network_height.argtypes = [c_void_p]
@@ -321,28 +321,25 @@ network_predict_batch.argtypes = [c_void_p, IMAGE, c_int, c_int, c_int,
 network_predict_batch.restype = POINTER(DETNUMPAIR)
 
 
-def dummy_predict_grpc(frame):
-    return [1], [1], [1], [1], [1]
-
     
 
 if __name__ == "__main__":
     import cv2
     net1, class1, colors1 = load_network("yolov3-tiny_lp.cfg", "lp.data", "yolov3-tiny_lp_800000.weights")
-    img = cv2.resize(cv2.imread("lp.jpg"), (192, 128))
+    img = cv2.resize(cv2.imread("images/lp.jpg"), (192, 128))
     img_for_detect = make_image(192, 128, 3)
     copy_image_from_bytes(img_for_detect, img.tobytes())
     r = detect_image(net1, class1, img_for_detect)
     print(r)
     labeled_img = draw_boxes(r, img, colors1)
-    cv2.imwrite('prediction_lp.jpg', labeled_img)
+    cv2.imwrite('images/prediction_lp.jpg', labeled_img)
 
     net2, class2, colors2 = load_network("yolov4_lpv.cfg", "lp_vehicles.data", "yolov4_lpv_last.weights")
-    img = cv2.resize(cv2.imread("frame3.jpg"), (416, 416))
+    img = cv2.resize(cv2.imread("images/frame3.jpg"), (416, 416))
     img_encoded = cv2.imencode('.jpg', img)[1]
     img_for_detect = make_image(416, 416, 3)
     copy_image_from_bytes(img_for_detect, img_encoded.tobytes())
     r = detect_image(net2, class2, img_for_detect)
     print(r)
     labeled_img = draw_boxes(r, img, colors2)
-    cv2.imwrite('prediction_lpv.jpg', labeled_img)
+    cv2.imwrite('images/prediction_lpv.jpg', labeled_img)

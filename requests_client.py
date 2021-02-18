@@ -14,7 +14,7 @@ import time
 # actual code for profiling
 
 t1 = time.process_time()
-img = cv2.resize(cv2.imread('frame4.jpg'), (416,416))
+img = cv2.resize(cv2.imread('images/frame4.jpg'), (416,416))
 print(sys.getsizeof(img))
 img_encoded = cv2.imencode('.jpg', img)[1]
 print(sys.getsizeof(img_encoded))

@@ -5,4 +5,4 @@ numpy
 fastapi
 uvicorn[standard]
 requests
-faster_than_requests
+# faster_than_requests

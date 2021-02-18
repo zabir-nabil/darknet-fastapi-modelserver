@@ -4,7 +4,7 @@ import sys
 
 import darknet
 
-img = cv2.resize(cv2.imread('frame3.jpg'), (416,416))
+img = cv2.resize(cv2.imread('images/frame3.jpg'), (416,416))
 print(sys.getsizeof(img))
 img_encoded = cv2.imencode('.jpg', img)[1]
 print(sys.getsizeof(img_encoded))
@@ -29,7 +29,7 @@ nparr = np.frombuffer(img_bytes, np.byte)
 img2 = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED) # , cv2.IMREAD_REDUCED_COLOR_8)
 
 print(sys.getsizeof(img2))
-cv2.imwrite('out.jpg', img2) # , [cv2.IMWRITE_JPEG_PROGRESSIVE])
+cv2.imwrite('images/out.jpg', img2) # , [cv2.IMWRITE_JPEG_PROGRESSIVE])
 
 netc, classc, colorc = darknet.load_network("yolov4_lpv.cfg", "lp_vehicles.data", "yolov4_lpv_last.weights")
 

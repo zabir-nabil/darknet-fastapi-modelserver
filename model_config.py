@@ -1,6 +1,8 @@
 # list of models to be loaded in runtime
 # provide the path for cfg, data, and weights file
 
+darknet_path = "/usr/local/libdarknet.so" # keep the libdarknet.so file after make in this location
+
 models = {
     0: {
         "cfg": "model_data/yolov4_lpv.cfg",

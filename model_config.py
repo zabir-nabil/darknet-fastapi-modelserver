@@ -3,14 +3,14 @@
 
 models = {
     0: {
-        "cfg": "yolov4_lpv.cfg",
-        "data": "lp_vehicles.data",
-        "weights": "yolov4_lpv_last.weights"
+        "cfg": "model_data/yolov4_lpv.cfg",
+        "data": "model_data/lp_vehicles.data",
+        "weights": "model_data/yolov4_lpv_last.weights"
     },
 
     1: {
-        "cfg": "yolov3-tiny_lp.cfg",
-        "data": "lp.data",
-        "weights": "yolov3-tiny_lp_800000.weights"
+        "cfg": "model_data/yolov3-tiny_lp.cfg",
+        "data": "model_data/lp.data",
+        "weights": "model_data/yolov3-tiny_lp_800000.weights"
     }
 }
